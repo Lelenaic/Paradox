@@ -1,0 +1,56 @@
+<?php
+session_start();
+include '../includes/options.php';
+//require '../../random_compat/lib/random.php';
+require '../class/autoloader.php';
+Autoloader::register();
+require '../../PHPMailer/PHPMailerAutoload.php';
+
+if ($page!='ban' and $page!='noPerms' and $page!='first' and $page!='proxy' and $page!='getImg' and $page!='reporter') {
+    Utilitaires::mustLogged();
+    Utilitaires::logout();
+    $security=new Security();
+    $security->loginValidity();
+    $first=new First();
+    $first->isFirst();
+    $editEntreprise=new EditEntreprise();
+    $editEntreprise->setAtt($page);
+    $editEntreprise->doEdit();
+    $user=new EditUser();
+    $user->setAtt($page);
+    $user->doEdit();
+    $newEntreprise=new AjoutEntreprise();
+    $newEntreprise->doInsert($page);
+    $newUser=new AjoutUser();
+    $newUser->doInsert($page);
+    $adminUser=new AdminUser();
+    $adminUser->doDelete($page);
+    $entreprises=new Entreprises();
+    $entreprises->doDelete($page);
+    $entreprises->doValid($page);
+    $stages=new Stages();
+    $stages->doValidStage($page);
+    $dash=new Dashboard();
+    $dash->doChangePass();
+    $ajoutArticle=new AjoutArticle();
+    $ajoutArticle->doAjout($page);
+    $articles=new Articles();
+    $articles->doMontrer($page);
+    $articles->doDelete($page);
+    $editArticle=new EditArticle();
+    $editArticle->doEdit($page);
+    $categories=new Categories();
+    $categories->doDelete($page);
+    $ajoutCate=new AjoutCategories();
+    $ajoutCate->doInsert($page);
+    $classes=New Classes();
+    $classes->doDelete($page);
+    $ajoutClasse=new AjoutClasse();
+    $ajoutClasse->doInsert($page);
+    $affectationEleves=new AffectationEleves();
+    $affectationEleves->doAffect($page);
+    $importEleves=new ImportEleves();
+    $importEleves->doInsert($page);
+    include '../includes/header.php';
+}
+include '../pages/'.$page.'.php';
