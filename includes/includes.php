@@ -28,7 +28,6 @@ $ajoutStage=new AjoutStage();
 $ajoutStage->doInsert($page);
 $profil=new Profil();
 $profil->doEdit($page);
-include '../includes/analytics.php';
 if (!in_array($page, $pages)) {
     include '../includes/header.php';
     include '../pages/'.$page.'.php';
