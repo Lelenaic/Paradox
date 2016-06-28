@@ -61,7 +61,7 @@ class Profil {
                     $this->editPhoto();
                 }
 
-                if (isset($_POST['mdp'])) {
+                if (isset($_POST['mdp']) and $_POST['mdp']!='') {
                     $this->editMdp();
                 }
                 header('location: profil?maj');
