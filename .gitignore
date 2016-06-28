@@ -1,4 +1,4 @@
-includes/options.php
+options.php
 files/
 analytics.php
-users/*.*
+users/
