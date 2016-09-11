@@ -74,7 +74,7 @@ class AdminUser {
             }
             $img=Database::query('select img from '.$_GET['type'].' where id='.$_GET['supprId']);
             unlink('../html/images/users/'.$img[0][0]);
-            //Database::exec('delete from stages where user_id='.$_GET['supprId'].' and user_type=\''.$GET['type'].'\'');
+            Database::exec('delete from stages where user_id='.$_GET['supprId'].' and user_type=\''.$GET['type'].'\'');
             Database::exec('delete from '.$_GET['type'].' where id='.$_GET['supprId']);
             header('location: ./utilisateurs?type='.$this->_userType.'&supprOk');
         }
